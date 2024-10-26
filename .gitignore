@@ -1,0 +1,56 @@
+# Python #
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pyo
+*.pyd
+
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
+
+# Virtualenv #
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# IDEs e Editores #
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Banco de Dados #
+*.sqlite3
+
+# System Files #
+.DS_Store
+Thumbs.db
+
+# Migration Files #
+**/migrations/*.py
+**/migrations/*.pyc
+
+# Configurações e Credenciais #
+.env
+config/settings/local.py
+config/settings/*.pyc
+
+# Node (para projetos com frontend integrado) #
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Outros #
+*.bak
+*.backup
+*.orig
