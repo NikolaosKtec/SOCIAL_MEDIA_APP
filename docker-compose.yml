@@ -6,7 +6,12 @@ services:
   web:
     build: .
     container_name: django_app
-    command: python manage.py runserver 0.0.0.0:8000
+    command: | 
+      sh -c "
+      python manage.py makemigrations social_network &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000
+      "
     volumes:
       - .:/app
     ports:
@@ -19,3 +24,10 @@ services:
     container_name: memcached
     ports:
       - "11211:11211"
+  test:
+    build: .
+    command: python manage.py test
+    volumes:
+      - .:/app
+    #environment:
+    #  - DATABASE_NAME=db.sqlite3

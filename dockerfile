@@ -10,8 +10,12 @@ WORKDIR /app
 # Add the current directory files (on your machine) to the container
 ADD . /app/
 
-# nstall any needed packages specified in requirements.txt
+# install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
+
+ENTRYPOINT ["/app/create_superuser.sh"]
+
+RUN python manage.py migrate
 
 
 # Expose the port server is running on
