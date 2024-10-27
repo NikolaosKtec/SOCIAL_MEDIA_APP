@@ -1,4 +1,4 @@
-from django.contrib.auth.hashers import check_password
+
 from django.contrib.auth import get_user_model
 
 from rest_framework.views import APIView
@@ -8,15 +8,15 @@ from rest_framework import status,permissions
 
 
 
-from ..serializers import ObtainTokenSerializer, UserSerializer
+from ..serializers import ObtainTokenSerializer
 from ..management.authentication import JWTAuthentication
 
 
-# fetch data
+
 User = get_user_model()
 
 class LoginView(APIView):
-
+    # NOTE this class does the login and returns an authentication token
     permission_classes = [permissions.AllowAny]
     serializer_class = ObtainTokenSerializer
 

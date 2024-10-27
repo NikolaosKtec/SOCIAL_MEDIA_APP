@@ -49,7 +49,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
         payload = {
             'user_identifier': user.username,
             # set the expiration time for 20 minutes from now
-            'exp': int((datetime.now() + timedelta(hours=settings.JWT_CONF['TOKEN_LIFETIME_MINUTES'])).timestamp()),
+            'exp': int((datetime.now() + timedelta(minutes=settings.JWT_CONF['TOKEN_LIFETIME_MINUTES'])).timestamp()),
             'iat': datetime.now().timestamp(),
             # 'username': user.username,
             # 'email': user.email

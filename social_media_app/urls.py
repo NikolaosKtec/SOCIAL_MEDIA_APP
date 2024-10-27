@@ -30,16 +30,19 @@ from social_network.views import UserView,PostView,LoginView
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    path('token/',TokenObtainPairView.as_view()),
-    path('token/',TokenRefreshView.as_view()),
-
+    #  create and list users.
     path('users/',UserView.UserView.as_view()),
+    # create and list posts.
     path('posts/',PostView.PostView.as_view()),
+    # like a post, *id is the mandatory, target argument.
     path('posts/like/<int:id>/',PostView.LikePost.as_view()), 
-    path('feed/',PostView.LikePost.as_view()), 
-
+    
+    # authenticates users to use the API.
     path('login/',LoginView.LoginView.as_view() ),
+    # follow a user, *id is the mandatory, target argument.
     path('users/follow/<int:id>/',UserView.FollowView.as_view() ),
+    # unollow a user, *id is the mandatory, target argument.
     path('users/unfollow/<int:id>/',UserView.UnfollowView.as_view() ),
-    path('feed/',UserView.UnfollowView.as_view() )
+    # post feed.
+    path('feed/',PostView.FeedView.as_view() )
 ]

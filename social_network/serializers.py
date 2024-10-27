@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from .models import PostModel
 from rest_framework.serializers import ValidationError
 
-class PostModelSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
 
    
     class Meta:
@@ -33,7 +33,7 @@ class PostModelSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
 
-    posts = PostModelSerializer(read_only=True,many=True)
+    posts = PostSerializer(read_only=True,many=True)
 
     class Meta:
         model = get_user_model()
@@ -54,20 +54,6 @@ class UserSerializer(serializers.ModelSerializer):
         
         self.password = make_password( self._validated_data.get('password') )
            
-    # def validate(self,*,title,text,user):
-        
-    #     # if title == "":
-    #     #     raise serializers.ValidationError("Title não pode ser nulo!")
-    #     if len(title) > 64:
-    #         raise serializers.ValidationError("Title é muito longo!")
-    #     if len(title) < 4:
-    #         raise serializers.ValidationError("Title é muito curto!")
-        
-    #     if len(text) > 255:
-    #         raise serializers.ValidationError("Text é muito longo!")
-        
-        
-        # return True
 class ObtainTokenSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()

@@ -36,13 +36,13 @@ class UserModel(AbstractUser):
     def addFollowers(self, new):
         
         if self.isDuplicatedFollowers(new):
-            raise ValidationError("Já existe este seguidor na sua lista!")
+            raise ValidationError("This follower already exists on your list!")
         self.followers +=str(new)+','
 
     def removeFollowers(self, new):
         index = self.followers.find(str(new))
         if index == -1:
-            raise ValidationError("Não existe este seguidor na sua lista!")
+            raise ValidationError("There is no such follower on your list!")
         elif( (index+1) == len(self.followers)): #last occours
             index -= 1
             self.followers = self.followers[0:index]

@@ -2,7 +2,7 @@
 # settings.configure()
 import json
 from rest_framework.test import APITestCase,RequestsClient
-from ..social_network.models import UserModel
+from .models import UserModel
 import logging
 # rest_framework.request.Request
 # from rest_framework.test import APIRequestFactory
@@ -16,11 +16,11 @@ class Test(APITestCase):
    
     def setUp(self):
 
-        UserModel.objects.create(userName='userName',email='email@0',password='password',followers='')
-        UserModel.objects.create(userName='userName2',email='email@2',password='password',followers='')
-        UserModel.objects.create(userName='userName3',email='email@3',password='password',followers='')
-        UserModel.objects.create(userName='userName4',email='email@4',password='password',followers='')
-        UserModel.objects.create(userName='userName5',email='email@5',password='password',followers='')
+        UserModel.objects.create(username='userName',email='email@0',password='password',followers='')
+        UserModel.objects.create(username='userName2',email='email@2',password='password',followers='')
+        UserModel.objects.create(username='userName3',email='email@3',password='password',followers='')
+        UserModel.objects.create(username='userName4',email='email@4',password='password',followers='')
+        UserModel.objects.create(username='userName5',email='email@5',password='password',followers='')
       
     def testGetUsers(self):
         request  = self.client.get(f'{self.url_base}users/')
