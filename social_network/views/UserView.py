@@ -6,7 +6,8 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie, vary_on_headers
 
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
@@ -23,9 +24,13 @@ class Pagination(PageNumberPagination):
     max_page_size=100
 # fetch Users an create Users
 class UserView(APIView,PageNumberPagination):
-    pagination_class = Pagination  
-    permission_classes = [IsAuthenticated]
-    # with auth
+    pagination_class = Pagination
+
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [AllowAny()]
+        return [IsAuthenticated()]
+        # with auth
     @method_decorator(cache_page(60 * 15 ),vary_on_headers("Bearer")) #15 minutes
     def get(self,request,*args, **kwargs):
         
@@ -35,8 +40,8 @@ class UserView(APIView,PageNumberPagination):
             page = UserSerializer(page,many=True).data
            
             return Response( data={'data':page,'next':paginator.get_next_link(),'previous':paginator.get_previous_link()})
-    
-    
+
+
     def post(self, request,*args, **kwargs):
             serializer = UserSerializer(data=request.data, many=True, allow_empty=False)
             if serializer.is_valid():

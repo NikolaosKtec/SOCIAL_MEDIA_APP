@@ -13,9 +13,7 @@ ADD . /app/
 # install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["/app/create_superuser.sh"]
 
-RUN python manage.py migrate
 
 
 # Expose the port server is running on

@@ -1,7 +1,8 @@
 # from django.conf import settings
 # settings.configure()
 import json
-from rest_framework.test import APITestCase,RequestsClient
+from rest_framework.test import APITestCase,RequestsClient,force_authenticate
+
 from .models import UserModel
 import logging
 # rest_framework.request.Request
@@ -13,6 +14,7 @@ class Test(APITestCase):
     client = RequestsClient()
     headers = {'Authorization': 'Token 6a192de3bb41380ba44d477ecce73d377ebfba1a'}
     url_base = 'http://localhost:8000/'
+    user = UserModel.objects.get(username='userName')
    
     def setUp(self):
 
@@ -23,7 +25,9 @@ class Test(APITestCase):
         UserModel.objects.create(username='userName5',email='email@5',password='password',followers='')
       
     def testGetUsers(self):
+
         request  = self.client.get(f'{self.url_base}users/')
+        force_authenticate(request, user=user)
         # print(request.headers)
         self.assertTrue( request.status_code == 200 and request.headers['Content-Type'] == 'application/json',msg= """ conteudo da resposta 
                         não é application/json ou status code não é 200 """)
@@ -40,6 +44,7 @@ class Test(APITestCase):
         
         request = self.client.post(f'{self.url_base}users/',data=json.dumps(user_raw),
             content_type='application/json')
+        force_authenticate(request, user=user)
         self.assertTrue( request.status_code == 201,msg=f"usuario não foi criado! error: {request.content}")
   
 
@@ -56,7 +61,7 @@ class Test(APITestCase):
         
         request = self.client.post(f'{self.url_base}users/',data=json.dumps(user_raw),
             content_type='application/json')
-        
+        force_authenticate(request, user=user)
         self.assertTrue( request.status_code == 400, msg=f'{request.content}')
 
     def test_EmailAlreadyExists(self):
@@ -72,7 +77,7 @@ class Test(APITestCase):
         
         request = self.client.post(f'{self.url_base}users/',data=json.dumps(user_raw),
             content_type='application/json')
-        
+        force_authenticate(request, user=user)
         self.assertTrue( request.status_code == 400, msg=f'{request.content}')
 
     def test_PostUserWeakPassword(self):
@@ -88,7 +93,7 @@ class Test(APITestCase):
         
         request = self.client.post(f'{self.url_base}users/',data=json.dumps(user_raw),
             content_type='application/json')
-        
+        force_authenticate(request, user=user)
         self.assertTrue( request.status_code == 400, msg=f'{request.content}')
         
     def test_PostNoneFields(self):
@@ -104,8 +109,8 @@ class Test(APITestCase):
         
         request = self.client.post(f'{self.url_base}users/',data=json.dumps(user_raw),
             content_type='application/json')
-        
-        
+
+        force_authenticate(request, user=user)
         self.assertTrue( request.status_code == 400, msg=f'{request.content}')
 
     # def test_put_curso(self):

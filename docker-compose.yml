@@ -18,6 +18,8 @@ services:
       - "8000:8000"
     depends_on:
       - memcached
+    environment:
+        - DATABASE_NAME=db.sqlite3
 
   memcached:
     image: memcached:latest
@@ -29,5 +31,5 @@ services:
     command: python manage.py test
     volumes:
       - .:/app
-    #environment:
-    #  - DATABASE_NAME=db.sqlite3
+    environment:
+      - DATABASE_NAME=db.sqlite3
