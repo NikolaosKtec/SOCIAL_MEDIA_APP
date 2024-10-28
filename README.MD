@@ -27,7 +27,10 @@ docker-compose build
 ```
 docker-compose up
 ```
-
+## 📝 Use
+Have already created a user, password: 'admin' username: 'admin', use it to obtain a token
+it will be necessary for access;
+or create a new 'user' in POST- users/
 
 ## 🔨 TECHNICAL REQUIREMENTS
 - ✅ Field validation
@@ -51,13 +54,14 @@ docker-compose up
 
 <img src="image.png" width=400 />
 
-
+## 🔨 TESTING
+    -RUN python manage.py test
 
 
 ## 📝 Endpoins
 
 ## /users
-    -GET, and POST users
+    -GET, and POST users post(open) for new Users
 ## /posts
     -GET, and POST posts
 ## /posts/like
