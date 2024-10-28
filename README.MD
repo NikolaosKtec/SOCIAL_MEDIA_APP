@@ -31,6 +31,7 @@ docker-compose up
 Have already created a user, password: 'admin' username: 'admin', use it to obtain a token
 it will be necessary for access;
 or create a new 'user' in POST- users/
+-   NOTE: the database already has some data for api testing, see GET - posts/ and users/
 
 ## 🔨 TECHNICAL REQUIREMENTS
 - ✅ Field validation
@@ -51,6 +52,8 @@ or create a new 'user' in POST- users/
 
 # ☕ Database scheme
     - for simplicity and small data, sqllite3 was used
+        
+
 
 <img src="image.png" width=400 />
 
